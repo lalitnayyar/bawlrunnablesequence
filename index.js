@@ -22,11 +22,10 @@ const grammarTemplate = `Given a sentence correct the grammar.
     `
 const grammarPrompt = PromptTemplate.fromTemplate(grammarTemplate)
 
+const punctuationChain = RunnableSequence.from([punctuationPrompt, llm, new StringOutputParser(),])
+
 const chain = RunnableSequence.from([
-    punctuationPrompt,
-    llm,
-    new StringOutputParser(),
-    {punctuated_sentence: prevResult => prevResult},
+    { punctuated_sentence: punctuationChain },
     grammarPrompt,
     llm,
     new StringOutputParser(),
