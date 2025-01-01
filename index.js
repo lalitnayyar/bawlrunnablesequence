@@ -39,7 +39,7 @@ const chain = RunnableSequence.from([
     },
     {
         grammatically_correct_sentence: grammarChain,
-        original_input: original_input => console.log(original_input)
+        language: ({ original_input }) => original_input.language
     },
     translationChain
 ])
