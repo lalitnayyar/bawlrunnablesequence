@@ -26,7 +26,10 @@ const chain = RunnableSequence.from([
     punctuationPrompt,
     llm,
     new StringOutputParser(),
-    // grammarPrompt
+    {punctuated_sentence: prevResult => prevResult},
+    grammarPrompt,
+    llm,
+    new StringOutputParser(),
 ])
 
 
